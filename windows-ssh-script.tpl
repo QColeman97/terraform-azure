@@ -1,4 +1,4 @@
-add-content -path c:/users/quinn/.ssh/config -value @'
+add-content -path C:\Users\Quinn\.ssh\config -value @'
 
 Host ${hostname}
     HostName ${hostname}
