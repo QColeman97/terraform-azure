@@ -56,7 +56,7 @@ resource "azurerm_network_security_rule" "mtc-dev-rule" {
   protocol                    = "*"
   source_port_range           = "*"
   destination_port_range      = "*"
-  source_address_prefix       = "172.20.20.20" # This is my current public IP address
+  source_address_prefix       = "*" # 172.20.20.20" # This is my current public IP address
   destination_address_prefix  = "*"
   resource_group_name         = azurerm_resource_group.mtc-rg.name
   network_security_group_name = azurerm_network_security_group.mtc-sg.name
@@ -104,6 +104,8 @@ resource "azurerm_linux_virtual_machine" "mtc-vm" {
   network_interface_ids = [
     azurerm_network_interface.mtc-nic.id,
   ]
+
+  custom_data = filebase64("customdata.tpl") # for Azure VM to download & install Docker
 
   admin_ssh_key {
     username   = "adminuser"
